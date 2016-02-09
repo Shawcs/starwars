@@ -1,6 +1,7 @@
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+
+/** @jsx React.DOM */
+
 
 var quotes = [{
   'author': '- Yoda',
@@ -39,8 +40,13 @@ var quotes = [{
 
 ReactDOM.render(
   React.createElement('h1', null, quotes[Math.floor(Math.random() * quotes.length)].quote),
-  document.getElementById('example')
+  document.getElementById('quote')
+  
 
+);
+ReactDOM.render(
+ React.createElement('h1', null, quotes[Math.floor(Math.random() * quotes.length)].author),
+  document.getElementById('author')
 );
 var name=new Array();
 function getName(){
@@ -52,7 +58,29 @@ console.log(quotes[i].author);
 name[i]=quotes[i].author;
 }
 };
-
 getName();
 
+var tab_author = [];
+for(var i = 0; i < quotes.length ; i++)
+{
+  if(tab_author.indexOf(quotes[i].author) == -1)
+    tab_author.push(quotes[i].author);
+}
+
+var InflexibleListRender = React.createClass({displayName: "InflexibleListRender",
+    render: function() {
+      return (
+        React.createElement("ul", null,
+          React.createElement("li", null, this.props.list[0]),
+          React.createElement("li", null, this.props.list[1]),
+          React.createElement("li", null, this.props.list[2]),
+          React.createElement("li", null, this.props.list[3]),
+          React.createElement("li", null, this.props.list[4]),
+      React.createElement("li", null, this.props.list[5]),
+      React.createElement("li", null, this.props.list[6])
+        )
+      )
+    }
+  });
+  ReactDOM.render(React.createElement(InflexibleListRender, {list: tab_author}), document.getElementById('test'));
 
